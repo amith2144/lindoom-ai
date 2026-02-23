@@ -1,0 +1,12 @@
+```
+
+---
+
+## 📄 Step 5 — Create `.dockerignore`
+
+In your `backend` folder, create a file called `.dockerignore` — this tells Docker to **skip** unnecessary files:
+```
+venv/
+__pycache__/
+*.pyc
+.env

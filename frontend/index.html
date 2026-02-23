@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lindoom — IT Support</title>
+  <style>
+    /* ─── RESET & BASE ─── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0a0f;
+      color: #e0e0e0;
+    }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: #0d0d1a;
+      border-bottom: 1px solid #1e1e3a;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #7b61ff;
+      letter-spacing: 1px;
+    }
+    .logo span { color: #fff; }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+    nav ul a {
+      text-decoration: none;
+      color: #aaa;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    nav ul a:hover { color: #7b61ff; }
+    .nav-btn {
+      background: #7b61ff;
+      color: #fff !important;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .nav-btn:hover { background: #6a50ee !important; color: #fff !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 20px;
+      background: radial-gradient(ellipse at top, #1a1040 0%, #0a0a0f 70%);
+    }
+    .hero-badge {
+      background: #1e1e3a;
+      color: #7b61ff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      max-width: 700px;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: #7b61ff; }
+    .hero p {
+      color: #888;
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+    .hero-btns { display: flex; gap: 16px; }
+    .btn-primary {
+      background: #7b61ff;
+      color: #fff;
+      padding: 14px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+    .btn-primary:hover { background: #6a50ee; }
+    .btn-secondary {
+      background: transparent;
+      color: #aaa;
+      padding: 14px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid #2a2a4a;
+      transition: border-color 0.3s;
+    }
+    .btn-secondary:hover { border-color: #7b61ff; color: #fff; }
+
+    /* ─── SERVICES ─── */
+    .services {
+      padding: 80px 60px;
+      text-align: center;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .section-sub {
+      color: #666;
+      margin-bottom: 50px;
+      font-size: 1rem;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #0d0d1a;
+      border: 1px solid #1e1e3a;
+      border-radius: 12px;
+      padding: 30px 20px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .card:hover { border-color: #7b61ff; transform: translateY(-4px); }
+    .card-icon { font-size: 2rem; margin-bottom: 14px; }
+    .card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .card p { color: #666; font-size: 0.85rem; line-height: 1.6; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #444;
+      font-size: 0.85rem;
+      border-top: 1px solid #1e1e3a;
+    }
+
+    /* ─── CHAT BUTTON ─── */
+    #chat-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #7b61ff;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 22px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(123,97,255,0.4);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    #chat-toggle:hover { background: #6a50ee; }
+
+    /* ─── CHAT WIDGET ─── */
+    #chat-widget {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 370px;
+      height: 520px;
+      background: #0d0d1a;
+      border: 1px solid #1e1e3a;
+      border-radius: 16px;
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+    #chat-widget.open { display: flex; }
+
+    .chat-header {
+      background: #7b61ff;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .chat-avatar {
+      width: 38px;
+      height: 38px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+    .chat-header-info h4 { font-size: 0.95rem; font-weight: 700; color: #fff; }
+    .chat-header-info span { font-size: 0.75rem; color: #d4caff; }
+    .chat-close {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: #2a2a4a; border-radius: 4px; }
+
+    .msg {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .msg.bot {
+      background: #1a1a2e;
+      color: #ddd;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+    .msg.user {
+      background: #7b61ff;
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .msg.typing {
+      background: #1a1a2e;
+      color: #666;
+      align-self: flex-start;
+      font-style: italic;
+    }
+
+    .chat-input-area {
+      display: flex;
+      padding: 12px;
+      border-top: 1px solid #1e1e3a;
+      gap: 8px;
+    }
+    #user-input {
+      flex: 1;
+      background: #1a1a2e;
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 0.88rem;
+      outline: none;
+    }
+    #user-input:focus { border-color: #7b61ff; }
+    #send-btn {
+      background: #7b61ff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+    #send-btn:hover { background: #6a50ee; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">Lindo<span>om</span></div>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#" class="nav-btn">Get Support</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">⚡ AI-Powered IT Support</div>
+    <h1>Fast, Reliable <span>Tech Support</span> For Everyone</h1>
+    <p>Lindoom provides 24/7 AI-assisted IT support. Get instant help with troubleshooting, network issues, and more.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-primary">Get Support Now</a>
+      <a href="#" class="btn-secondary">Learn More</a>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services">
+    <h2 class="section-title">What We Handle</h2>
+    <p class="section-sub">From everyday IT issues to complex infrastructure problems</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <h3>Network Support</h3>
+        <p>WiFi issues, VPN setup, network configuration and diagnostics.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔐</div>
+        <h3>Security & Access</h3>
+        <p>Password resets, account recovery, and security audits.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💻</div>
+        <h3>Device Troubleshooting</h3>
+        <p>Laptop, desktop, and peripheral hardware and software issues.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">☁️</div>
+        <h3>Cloud Solutions</h3>
+        <p>Cloud setup, migration, and ongoing management support.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Lindoom. All rights reserved. | support@lindoom.com | 1-800-LINDOOM</p>
+  </footer>
+
+  <!-- CHAT TOGGLE BUTTON -->
+  <button id="chat-toggle">💬 Chat with Lindo</button>
+
+  <!-- CHAT WIDGET -->
+  <div id="chat-widget">
+    <div class="chat-header">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-header-info">
+        <h4>Lindo</h4>
+        <span>Lindoom AI Support • Online</span>
+      </div>
+      <button class="chat-close" id="chat-close">✕</button>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="msg bot">👋 Hi! I'm Lindo, your Lindoom IT support assistant. How can I help you today?</div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="user-input" placeholder="Type your issue..." />
+      <button id="send-btn">➤</button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    const toggle = document.getElementById('chat-toggle');
+    const widget = document.getElementById('chat-widget');
+    const closeBtn = document.getElementById('chat-close');
+    const sendBtn = document.getElementById('send-btn');
+    const input = document.getElementById('user-input');
+    const messages = document.getElementById('chat-messages');
+
+    // Open/close chat
+    toggle.addEventListener('click', () => widget.classList.toggle('open'));
+    closeBtn.addEventListener('click', () => widget.classList.remove('open'));
+
+    // Send message on button click or Enter key
+    sendBtn.addEventListener('click', sendMessage);
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessage(); });
+
+    async function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+
+      // Show user message
+      appendMessage(text, 'user');
+      input.value = '';
+
+      // Show typing indicator
+      const typing = appendMessage('Lindo is typing...', 'typing');
+
+      try {
+        // Send to your backend
+        const response = await fetch('http://127.0.0.1:8000/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+
+        const data = await response.json();
+        typing.remove();
+        appendMessage(data.reply, 'bot');
+      } catch (error) {
+        typing.remove();
+        appendMessage('⚠️ Could not connect to Lindo. Please try again.', 'bot');
+      }
+    }
+
+    function appendMessage(text, type) {
+      const msg = document.createElement('div');
+      msg.classList.add('msg', type);
+      msg.textContent = text;
+      messages.appendChild(msg);
+      messages.scrollTop = messages.scrollHeight;
+      return msg;
+    }
+  </script>
+
+</body>
+</html>
